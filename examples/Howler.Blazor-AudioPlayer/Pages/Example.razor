@@ -1,0 +1,81 @@
+﻿@page "/"
+@using Howler.Blazor.Components
+
+<!-- Inject services -->
+@inject IHowl Howl
+@inject IHowlGlobal HowlGlobal
+
+<div>
+    <button class="btn btn-primary oi oi-media-play" @onclick="Play"></button>
+    <button class="btn btn-primary oi oi-media-stop" @onclick="Stop"></button>
+    <button class="btn btn-primary oi oi-media-pause" @onclick="Pause"></button>
+    <pre>TotalTime : @TotalTime</pre>
+    <pre>State : @State</pre>
+    <pre>Supported Codes : @SupportedCodes</pre>
+</div>
+
+@code {
+    protected TimeSpan TotalTime;
+    protected string State = "-";
+    protected string SupportedCodes;
+
+    /// <summary>
+    /// InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendererd. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+    /// </summary>
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            // Display all supported codecs
+            var codecs = await HowlGlobal.GetCodecs();
+            SupportedCodes = string.Join(", ", codecs);
+
+            StateHasChanged();
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        // Register callbacks
+        Howl.OnPlay += e =>
+        {
+            State = "Playing";
+            TotalTime = e.TotalTime;
+
+            StateHasChanged();
+        };
+
+        Howl.OnStop += e =>
+        {
+            State = "Stopped";
+
+            StateHasChanged();
+        };
+
+        Howl.OnPause += e =>
+        {
+            State = "Paused";
+
+            StateHasChanged();
+        };
+    }
+
+    protected async Task Play()
+    {
+        await Howl.Play("https://www.healingfrequenciesmusic.com/wp-content/uploads/2015/03/Love-Abounds-Sample.mp3?_=1");
+    }
+
+    protected async Task Stop()
+    {
+        await Howl.Stop();
+    }
+
+    protected async Task Pause()
+    {
+        await Howl.Pause();
+    }
+}
