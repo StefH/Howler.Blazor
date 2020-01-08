@@ -9,6 +9,8 @@
     <button class="btn btn-primary oi oi-media-play" @onclick="Play"></button>
     <button class="btn btn-primary oi oi-media-stop" @onclick="Stop"></button>
     <button class="btn btn-primary oi oi-media-pause" @onclick="Pause"></button>
+    @*<button class="btn btn-primary oi oi-media-step-backward" @onclick="Previous"></button>
+    <button class="btn btn-primary oi oi-media-step-forward" @onclick="Next"></button>*@
     <pre>TotalTime : @TotalTime</pre>
     <pre>State : @State</pre>
     <pre>Supported Codes : @SupportedCodes</pre>
@@ -66,7 +68,12 @@
 
     protected async Task Play()
     {
-        await Howl.Play("https://www.healingfrequenciesmusic.com/wp-content/uploads/2015/03/Love-Abounds-Sample.mp3?_=1");
+        var sources = new[]
+        {
+            "https://lookandstore.blob.core.windows.net/863da396-6e44-4b3b-8db1-e447d87b121f/instrumental_mp3_637141046337946343_99lfo/instrumental_mp3?sv=2018-03-28&sr=b&sig=96LJ7bycF3lrtiWbVP5tK6%2BOOIJKfq7eYPO%2FjOT72ns%3D&se=2022-10-04T18%3A23%3A53Z&sp=rl"
+            //"https://www.healingfrequenciesmusic.com/wp-content/uploads/2015/03/Love-Abounds-Sample.mp3?_=1"
+        };
+        await Howl.Play(sources);
     }
 
     protected async Task Stop()
