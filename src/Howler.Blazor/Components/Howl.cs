@@ -34,7 +34,7 @@ namespace Howler.Blazor.Components
 
             var options = new HowlSettings
             {
-                Sources = sources
+                Sources = sources // .Select(WebUtility.UrlEncode).ToArray()
             };
 
             return Play(options);
