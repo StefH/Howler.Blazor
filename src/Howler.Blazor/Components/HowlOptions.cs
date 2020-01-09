@@ -1,6 +1,6 @@
 ﻿namespace Howler.Blazor.Components
 {
-    public class HowlSettings
+    public class HowlOptions
     {
         /// <summary>
         /// The sources to the track(s) to be loaded for the sound (URLs or base64 data URIs).
@@ -8,6 +8,12 @@
         /// If your files have no extensions, you will need to explicitly specify the extension using the format property.
         /// </summary>
         public string[] Sources { get; set; }
+
+        /// <summary>
+        /// Howler.js automatically detects your file format from the extension,
+        /// but you may also specify a format in situations where extraction won't work (such as with a SoundCloud stream).
+        /// </summary>
+        public string[] Formats { get; set; }
 
         /// <summary>
         /// Set to true to force HTML5 Audio.

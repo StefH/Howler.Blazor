@@ -21,6 +21,7 @@ namespace Howler.Blazor.AudioPlayer
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
@@ -43,6 +44,9 @@ namespace Howler.Blazor.AudioPlayer
             }
 
             app.UseHttpsRedirection();
+
+            // Needed to play files from blob-storage ???
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             ConfigureStaticFiles(app);
 

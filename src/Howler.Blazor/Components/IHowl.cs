@@ -21,7 +21,7 @@ namespace Howler.Blazor.Components
 
         ValueTask<int> Play(byte[] audio, string mimeType);
 
-        ValueTask<int> Play(HowlSettings settings);
+        ValueTask<int> Play(HowlOptions options);
 
         ValueTask Stop();
 
