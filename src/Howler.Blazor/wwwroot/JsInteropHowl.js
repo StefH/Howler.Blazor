@@ -9,6 +9,7 @@ window.howl = {
 
         howl = new Howl({
             src: options.sources,
+            format: options.formats,
             html5: options.html5,
             onplay: async function (id) {
                 const duration = Math.round(howl.duration());

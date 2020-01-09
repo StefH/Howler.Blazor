@@ -109,7 +109,7 @@ namespace Howler.Blazor.Validation
             return value;
         }
 
-        public static IList<T> HasNoNulls<T>(IList<T> value, [InvokerParameterName] [NotNull] string parameterName)
+        public static IEnumerable<T> HasNoNulls<T>(IEnumerable<T> value, [InvokerParameterName] [NotNull] string parameterName)
             where T : class
         {
             NotNull(value, parameterName);
