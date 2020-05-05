@@ -4,15 +4,18 @@ A Blazor JSInterop wrapper for [Howler.js](https://howlerjs.com/).
 
 [![NuGet: Howler.Blazor](https://buildstats.info/nuget/Howler.Blazor)](https://www.nuget.org/packages/Howler.Blazor)
 
-## Usage
+### Live Demo
+https://stefh.github.io/Howler.Blazor
 
-### Install the NuGet
+### Usage
+
+#### Install the NuGet
 
 ```
 PM> Install-Package Howler.Blazor
 ```
 
-### Add the required dependency injections
+#### Add the required dependency injections
 ``` diff
 public void ConfigureServices(IServiceCollection services)
 {
@@ -21,7 +24,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-### Add the required javascripts to _Host.cshtml
+#### Add the required javascripts to _Host.cshtml
 ``` diff
 <head>
 +    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.core.min.js" integrity="sha256-q2vnVvwrx3RbYXPyAwx7c2npmULQg2VdCXBoJ5+iigs=" crossorigin="anonymous"></script>
@@ -29,7 +32,7 @@ public void ConfigureServices(IServiceCollection services)
 </head>
 ```
 
-### Use the player
+#### Use the player
 ``` html
 @page "/example"
 @using Howler.Blazor.Components
@@ -99,8 +102,5 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-### Live Demo
-
-
-### Example Page
+#### Example Page
 ![Blazor-WebDAV-AudioPlayer](https://raw.githubusercontent.com/StefH/WebDAV-AudioPlayer/master/resources/example.png "example")
