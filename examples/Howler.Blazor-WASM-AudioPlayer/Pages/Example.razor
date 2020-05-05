@@ -1,0 +1,131 @@
+﻿@page "/"
+@using Howler.Blazor.Components
+
+<!-- Inject services -->
+@inject IHowl Howl
+@inject IHowlGlobal HowlGlobal
+
+<div>
+    <table>
+        <tr>
+            <td><button class="btn btn-primary oi oi-media-play" @onclick="Play1"></button></td>
+            <td>Play an audio file with source location</td>
+        </tr>
+        <tr>
+            <td><button class="btn btn-primary oi oi-media-play" @onclick="Play2"></button></td>
+            <td>Play an audio file with source location and format</td>
+        </tr>
+        <tr>
+            <td><button class="btn btn-primary oi oi-media-pause" @onclick="Pause"></button></td>
+            <td>Pause</td>
+        </tr>
+        <tr>
+            <td><button class="btn btn-primary oi oi-media-stop" @onclick="Stop"></button></td>
+            <td>Stop</td>
+        </tr>
+    </table>
+    <br />
+
+    @*<button class="btn btn-primary oi oi-media-step-backward" @onclick="Previous"></button>
+        <button class="btn btn-primary oi oi-media-step-forward" @onclick="Next"></button>*@
+    <pre>TotalTime : @TotalTime</pre>
+    <pre>State : @State</pre>
+    <pre>Supported Codes : @SupportedCodes</pre>
+    <pre>ErrorMessage : @ErrorMessage</pre>
+</div>
+
+@code {
+    protected TimeSpan TotalTime;
+    protected string State = "-";
+    protected string SupportedCodes;
+    public string ErrorMessage = "";
+
+    /// <summary>
+    /// InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendererd. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+    /// </summary>
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            // Display all supported codecs
+            var codecs = await HowlGlobal.GetCodecs();
+            SupportedCodes = string.Join(", ", codecs);
+
+            StateHasChanged();
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        // Register callbacks
+        Howl.OnPlay += e =>
+        {
+            ErrorMessage = string.Empty;
+            State = "Playing";
+            TotalTime = e.TotalTime;
+
+            StateHasChanged();
+        };
+
+        Howl.OnStop += e =>
+        {
+            State = "Stopped";
+
+            StateHasChanged();
+        };
+
+        Howl.OnPause += e =>
+        {
+            State = "Paused";
+
+            StateHasChanged();
+        };
+
+        Howl.OnPlayError += e =>
+        {
+            ErrorMessage = $"OnPlayError : {e.Error}";
+
+            StateHasChanged();
+        };
+
+        Howl.OnLoadError += e =>
+        {
+            ErrorMessage = $"OnLoadError : {e.Error}";
+
+            StateHasChanged();
+        };
+    }
+
+    protected async Task Play1()
+    {
+        ErrorMessage = string.Empty;
+
+        await Howl.Play("https://www.healingfrequenciesmusic.com/wp-content/uploads/2015/03/Love-Abounds-Sample.mp3?_=1");
+    }
+
+    protected async Task Play2()
+    {
+        ErrorMessage = string.Empty;
+
+        var options = new HowlOptions
+        {
+            Sources = new[] { "https://lookandstore.blob.core.windows.net/863da396-6e44-4b3b-8db1-e447d87b121f/instrumental_mp3_637141046337946343_99lfo/instrumental_mp3?sv=2018-03-28&sr=b&sig=96LJ7bycF3lrtiWbVP5tK6%2BOOIJKfq7eYPO%2FjOT72ns%3D&se=2022-10-04T18%3A23%3A53Z&sp=rl" },
+            Formats = new[] { "mp3" }
+        };
+        await Howl.Play(options);
+    }
+
+    protected async Task Stop()
+    {
+        await Howl.Stop();
+    }
+
+    protected async Task Pause()
+    {
+        await Howl.Pause();
+    }
+}
