@@ -22,7 +22,8 @@ window.howl = {
                 await dotnetReference.invokeMethodAsync('OnPauseCallback', id);
             },
             onrate: async function (id) {
-                await dotnetReference.invokeMethodAsync('OnRateCallback', id);
+                const currentRate = howl.rate();
+                await dotnetReference.invokeMethodAsync('OnRateCallback', id, currentRate);
             },
             onend: async function (id) {
                 await dotnetReference.invokeMethodAsync('OnEndCallback', id);

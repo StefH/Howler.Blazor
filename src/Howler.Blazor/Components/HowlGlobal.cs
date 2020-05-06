@@ -7,6 +7,8 @@ namespace Howler.Blazor.Components
     public class HowlGlobal : IHowlGlobal
     {
         private readonly IJSRuntime _runtime;
+        public const double MaxRate = 4.0;
+        public const double MinRate = 0.25;
 
         public HowlGlobal(IJSRuntime runtime)
         {

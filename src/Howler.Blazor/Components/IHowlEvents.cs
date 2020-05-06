@@ -53,7 +53,7 @@ namespace Howler.Blazor.Components
         /// <summary>
         /// Fires when the sound's playback rate has changed.
         /// </summary>
-        event Action<HowlEventArgs> OnRate;
+        event Action<HowlRateEventArgs> OnRate;
 
         /// <summary>
         /// Fires when the sound has been seeked.

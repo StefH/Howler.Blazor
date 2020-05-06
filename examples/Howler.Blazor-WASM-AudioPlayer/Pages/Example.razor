@@ -24,8 +24,12 @@
             <td>Stop</td>
         </tr>
         <tr>
-            <td><button class="btn btn-primary oi oi-media-stop" @onclick="SpeedUp"></button></td>
+            <td><button class="btn btn-primary oi oi-arrow-top" @onclick="SpeedUp"></button></td>
             <td>Speed Up</td>
+        </tr>
+        <tr>
+            <td><button class="btn btn-primary oi oi-arrow-bottom" @onclick="SpeedDown"></button></td>
+            <td>Speed Down</td>
         </tr>
     </table>
     <br />
@@ -40,8 +44,10 @@
 </div>
 
 @code {
+    private const double MaxRate = 4.0;
+    private const double MinRate = 0.25;
     protected TimeSpan TotalTime;
-    protected Double Rate = 1.0;
+    protected double Rate = 1.0;
     protected string State = "-";
     protected string SupportedCodes;
     public string ErrorMessage = "";
@@ -91,6 +97,13 @@
             StateHasChanged();
         };
 
+        Howl.OnRate += e =>
+        {
+           Rate = e.CurrentRate;
+
+           StateHasChanged();
+        };
+
         Howl.OnPlayError += e =>
         {
             ErrorMessage = $"OnPlayError : {e.Error}";
@@ -134,10 +147,17 @@
 
     protected async Task SpeedUp()
     {
-        if (Rate <= 4.0 && State == "Playing")
+        if (Rate < MaxRate && State == "Playing")
         {
-            Rate += 0.25;
-            await Howl.Rate(Rate);
+            await Howl.Rate(Rate + .25);
+        }
+    }
+
+    protected async Task SpeedDown()
+    {
+        if (Rate > MinRate && State == "Playing")
+        {
+            await Howl.Rate(Rate - .25);
         }
     }
 

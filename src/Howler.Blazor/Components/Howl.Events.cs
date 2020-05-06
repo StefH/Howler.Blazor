@@ -14,7 +14,7 @@ namespace Howler.Blazor.Components
         public event Action<HowlEventArgs> OnPause;
         public event Action<HowlEventArgs> OnMute;
         public event Action<HowlEventArgs> OnVolume;
-        public event Action<HowlEventArgs> OnRate;
+        public event Action<HowlRateEventArgs> OnRate;
         public event Action<HowlEventArgs> OnSeek;
         public event Action<HowlEventArgs> OnFade;
         public event Action<EventArgs> OnUnlock;
