@@ -81,6 +81,11 @@ namespace Howler.Blazor.Components
             return _runtime.InvokeVoidAsync("howl.seek", position.TotalSeconds);
         }
 
+        public ValueTask Rate(double rate)
+        {
+            return _runtime.InvokeVoidAsync("howl.rate", rate);
+        }
+
         public ValueTask Load()
         {
             return _runtime.InvokeVoidAsync("howl.load");
@@ -94,6 +99,11 @@ namespace Howler.Blazor.Components
         public ValueTask<bool> IsPlaying()
         {
             return _runtime.InvokeAsync<bool>("howl.getIsPlaying", _dotNetObjectReference);
+        }
+
+        public async ValueTask<double> GetRate()
+        {
+            return await _runtime.InvokeAsync<double>("howl.rate");
         }
 
         public async ValueTask<TimeSpan> GetCurrentTime()

@@ -29,6 +29,8 @@ namespace Howler.Blazor.Components
 
         ValueTask Seek(TimeSpan position);
 
+        ValueTask Rate(double rate);
+
         /// <summary>
         /// This is called by default, but if you set preload to false, you must call load before you can play any sounds.
         /// </summary>
@@ -38,6 +40,8 @@ namespace Howler.Blazor.Components
         /// Unload and destroy a Howl object. This will immediately stop all sounds attached to this sound and remove it from the cache.
         /// </summary>
         ValueTask Unload();
+
+        ValueTask<double> GetRate();
 
         ValueTask<TimeSpan> GetCurrentTime();
 

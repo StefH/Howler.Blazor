@@ -23,6 +23,10 @@
             <td><button class="btn btn-primary oi oi-media-stop" @onclick="Stop"></button></td>
             <td>Stop</td>
         </tr>
+        <tr>
+            <td><button class="btn btn-primary oi oi-media-stop" @onclick="SpeedUp"></button></td>
+            <td>Speed Up</td>
+        </tr>
     </table>
     <br />
 
@@ -30,12 +34,14 @@
         <button class="btn btn-primary oi oi-media-step-forward" @onclick="Next"></button>*@
     <pre>TotalTime : @TotalTime</pre>
     <pre>State : @State</pre>
+    <pre>Playback Rate : @Rate</pre>
     <pre>Supported Codes : @SupportedCodes</pre>
     <pre>ErrorMessage : @ErrorMessage</pre>
 </div>
 
 @code {
     protected TimeSpan TotalTime;
+    protected Double Rate = 1.0;
     protected string State = "-";
     protected string SupportedCodes;
     public string ErrorMessage = "";
@@ -103,6 +109,7 @@
     protected async Task Play1()
     {
         ErrorMessage = string.Empty;
+        Rate = 1.0;
 
         await Howl.Play("https://www.healingfrequenciesmusic.com/wp-content/uploads/2015/03/Love-Abounds-Sample.mp3?_=1");
     }
@@ -110,6 +117,7 @@
     protected async Task Play2()
     {
         ErrorMessage = string.Empty;
+        Rate = 1.0;
 
         var options = new HowlOptions
         {
@@ -122,6 +130,15 @@
     protected async Task Stop()
     {
         await Howl.Stop();
+    }
+
+    protected async Task SpeedUp()
+    {
+        if (Rate <= 4.0 && State == "Playing")
+        {
+            Rate += 0.25;
+            await Howl.Rate(Rate);
+        }
     }
 
     protected async Task Pause()
