@@ -103,7 +103,7 @@ namespace Howler.Blazor.Components
 
         public async ValueTask<double> GetRate()
         {
-            return await _runtime.InvokeAsync<double>("howl.rate");
+            return await _runtime.InvokeAsync<double>("howl.getRate");
         }
 
         public async ValueTask<TimeSpan> GetCurrentTime()
