@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Howler.Blazor.Components.Events
+﻿namespace Howler.Blazor.Components.Events
 {
     public class HowlRateEventArgs : HowlEventArgs
     {
