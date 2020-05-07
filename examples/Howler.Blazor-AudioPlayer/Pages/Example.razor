@@ -23,6 +23,14 @@
             <td><button class="btn btn-primary oi oi-media-stop" @onclick="Stop"></button></td>
             <td>Stop</td>
         </tr>
+        <tr>
+            <td><button class="btn btn-primary oi oi-arrow-top" @onclick="SpeedUp"></button></td>
+            <td>Speed Up</td>
+        </tr>
+        <tr>
+            <td><button class="btn btn-primary oi oi-arrow-bottom" @onclick="SpeedDown"></button></td>
+            <td>Speed Down</td>
+        </tr>
     </table>
     <br />
 
@@ -30,12 +38,16 @@
         <button class="btn btn-primary oi oi-media-step-forward" @onclick="Next"></button>*@
     <pre>TotalTime : @TotalTime</pre>
     <pre>State : @State</pre>
+    <pre>Playback Rate : @Rate</pre>
     <pre>Supported Codes : @SupportedCodes</pre>
     <pre>ErrorMessage : @ErrorMessage</pre>
 </div>
 
 @code {
+    private const double MaxRate = 4.0;
+    private const double MinRate = 0.25;
     protected TimeSpan TotalTime;
+    protected double Rate = 1.0;
     protected string State = "-";
     protected string SupportedCodes;
     public string ErrorMessage = "";
@@ -85,6 +97,13 @@
             StateHasChanged();
         };
 
+        Howl.OnRate += e =>
+        {
+            Rate = e.CurrentRate;
+
+            StateHasChanged();
+        };
+
         Howl.OnPlayError += e =>
         {
             ErrorMessage = $"OnPlayError : {e.Error}";
@@ -103,6 +122,7 @@
     protected async Task Play1()
     {
         ErrorMessage = string.Empty;
+        Rate = 1.0;
 
         await Howl.Play("https://www.healingfrequenciesmusic.com/wp-content/uploads/2015/03/Love-Abounds-Sample.mp3?_=1");
     }
@@ -110,6 +130,7 @@
     protected async Task Play2()
     {
         ErrorMessage = string.Empty;
+        Rate = 1.0;
 
         var options = new HowlOptions
         {
@@ -122,6 +143,22 @@
     protected async Task Stop()
     {
         await Howl.Stop();
+    }
+
+    protected async Task SpeedUp()
+    {
+        if (Rate < MaxRate && State == "Playing")
+        {
+            await Howl.Rate(Rate + .25);
+        }
+    }
+
+    protected async Task SpeedDown()
+    {
+        if (Rate > MinRate && State == "Playing")
+        {
+            await Howl.Rate(Rate - .25);
+        }
     }
 
     protected async Task Pause()

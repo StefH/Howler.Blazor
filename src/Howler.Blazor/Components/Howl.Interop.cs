@@ -31,6 +31,12 @@ namespace Howler.Blazor.Components
         }
 
         [JSInvokable]
+        public void OnRateCallback(int soundId, double currentRate)
+        {
+            OnRate?.Invoke(new HowlRateEventArgs { SoundId = soundId, CurrentRate = currentRate });
+        }
+
+        [JSInvokable]
         public void OnEndCallback(int soundId)
         {
             OnEnd?.Invoke(new HowlEventArgs { SoundId = soundId });

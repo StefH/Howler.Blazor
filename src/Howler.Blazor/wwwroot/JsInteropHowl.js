@@ -21,6 +21,10 @@ window.howl = {
             onpause: async function (id) {
                 await dotnetReference.invokeMethodAsync('OnPauseCallback', id);
             },
+            onrate: async function (id) {
+                const currentRate = howl.rate();
+                await dotnetReference.invokeMethodAsync('OnRateCallback', id, currentRate);
+            },
             onend: async function (id) {
                 await dotnetReference.invokeMethodAsync('OnEndCallback', id);
             },
@@ -64,6 +68,11 @@ window.howl = {
             howl.seek(position);
         }
     },
+    rate: function (rate) {
+        if (howl) {
+            howl.rate(rate);
+        }
+    },
     load: function () {
         if (howl) {
             howl.load();
@@ -83,6 +92,13 @@ window.howl = {
         }
 
         return false;
+    },
+    getRate: function () {
+        if (howl) {
+            return howl.rate();
+        }
+
+        return 0;
     },
     getCurrentTime: function () {
         if (howl && howl.playing()) {
