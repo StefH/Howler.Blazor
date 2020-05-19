@@ -3,6 +3,7 @@ SET tmp_folder=docs-temp
 SET www_folder=%tmp_folder%/wwwroot
 SET docs_folder=docs
 
+dotnet clean examples/Howler.Blazor-WASM-AudioPlayer -c Release
 dotnet publish examples/Howler.Blazor-WASM-AudioPlayer -c Release -o %tmp_folder%
 
 rem delete all files except .gitattributes
