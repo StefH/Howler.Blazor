@@ -1,6 +1,6 @@
 name: DeployToGitHubPages
 env:
-  PUBLISH_DIR: examples/Howler.Blazor-WASM-AudioPlayer/bin/Release/netstandard2.0/publish/wwwroot
+  PUBLISH_DIR: examples/Howler.Blazor-WASM-AudioPlayer/bin/Release/netstandard2.1/publish/wwwroot
 
 # Controls when the action will run
 on:
