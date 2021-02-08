@@ -15,4 +15,10 @@
     <ProjectReference Include="..\..\src\Howler.Blazor\Howler.Blazor.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Pages\Example.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
 </Project>

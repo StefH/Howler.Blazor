@@ -8,6 +8,10 @@
 <div>
     <table>
         <tr>
+            <td><button class="btn btn-primary oi oi-media-play" @onclick="PlayLocal"></button></td>
+            <td>Play a local OGG file</td>
+        </tr>
+        <tr>
             <td><button class="btn btn-primary oi oi-media-play" @onclick="Play1"></button></td>
             <td>Play an audio file with source location</td>
         </tr>
@@ -34,8 +38,6 @@
     </table>
     <br />
 
-    @*<button class="btn btn-primary oi oi-media-step-backward" @onclick="Previous"></button>
-        <button class="btn btn-primary oi oi-media-step-forward" @onclick="Next"></button>*@
     <pre>TotalTime : @TotalTime</pre>
     <pre>State : @State</pre>
     <pre>Playback Rate : @Rate</pre>
@@ -117,6 +119,14 @@
 
             StateHasChanged();
         };
+    }
+
+    protected async Task PlayLocal()
+    {
+        ErrorMessage = string.Empty;
+        Rate = 1.0;
+
+        await Howl.Play("resources/TestRecording.ogg");
     }
 
     protected async Task Play1()
