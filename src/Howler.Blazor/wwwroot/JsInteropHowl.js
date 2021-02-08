@@ -12,7 +12,7 @@ window.howl = {
             format: options.formats,
             html5: options.html5,
             onplay: async function (id) {
-                const duration = Math.round(howl.duration());
+                const duration = Math.round(howl.duration(id));
                 await dotnetReference.invokeMethodAsync('OnPlayCallback', id, duration);
             },
             onstop: async function (id) {
