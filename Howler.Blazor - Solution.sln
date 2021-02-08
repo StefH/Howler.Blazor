@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blazor WebAssembly App", "B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Howler.Blazor-WASM-AudioPlayer", "examples\Howler.Blazor-WASM-AudioPlayer\Howler.Blazor-WASM-AudioPlayer.csproj", "{5B08D736-7BBE-4D4C-80CF-26A71DD36F01}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Howler.Blazor-WASM-AudioPlayer-NET5", "examples\Howler.Blazor-WASM-AudioPlayer-NET5\Howler.Blazor-WASM-AudioPlayer-NET5.csproj", "{F0E4CCFD-02B9-4F63-9875-B182EE3DCE2C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{5B08D736-7BBE-4D4C-80CF-26A71DD36F01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B08D736-7BBE-4D4C-80CF-26A71DD36F01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B08D736-7BBE-4D4C-80CF-26A71DD36F01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0E4CCFD-02B9-4F63-9875-B182EE3DCE2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0E4CCFD-02B9-4F63-9875-B182EE3DCE2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0E4CCFD-02B9-4F63-9875-B182EE3DCE2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0E4CCFD-02B9-4F63-9875-B182EE3DCE2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{D3804221-1234-4502-9595-39584E5A0000} = {8A9BC34B-DF33-49C3-AB28-92AEEBD45F84}
 		{4E9D1FD3-457A-41B2-BE3F-9E5703BD461B} = {FF14D365-9746-4E03-BF45-927F704C9314}
 		{5B08D736-7BBE-4D4C-80CF-26A71DD36F01} = {38EEA6F0-8208-4415-9CB0-6D4A85AF5419}
+		{F0E4CCFD-02B9-4F63-9875-B182EE3DCE2C} = {38EEA6F0-8208-4415-9CB0-6D4A85AF5419}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B6A8922C-F54E-40FD-B26A-0E636A9EE552}
