@@ -1,3 +1,6 @@
+# 0.9.4 (08 February 2021)
+- [#12](https://github.com/StefH/Howler.Blazor/pull/12) - Change duration to double and pass id to &quot;howl.duration(id)&quot; [enhancement] contributed by [StefH](https://github.com/StefH)
+
 # 0.9.3 (07 May 2020)
 - [#5](https://github.com/StefH/Howler.Blazor/pull/5) - Add Blazor WebAssemby example project + docs [enhancement] contributed by [StefH](https://github.com/StefH)
 - [#7](https://github.com/StefH/Howler.Blazor/pull/7) - Change playback rate contributed by [chris1411](https://github.com/chris1411)
