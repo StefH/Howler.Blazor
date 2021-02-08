@@ -111,9 +111,6 @@ window.howl = {
     getTotalTime: function () {
         if (howl) {
             const duration = howl.duration();
-
-            console.log(duration);
-
             return Math.round(duration || 0);
         }
 
