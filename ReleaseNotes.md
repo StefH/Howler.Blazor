@@ -1,3 +1,7 @@
+# 0.9.5 (10 February 2021)
+- [#13](https://github.com/StefH/Howler.Blazor/pull/13) - Handle invalid duration in Edge/Chrome [bug] contributed by [StefH](https://github.com/StefH)
+- [#10](https://github.com/StefH/Howler.Blazor/issues/10) - Problem getting length of ogg/opus blob on edge [bug]
+
 # 0.9.4 (08 February 2021)
 - [#12](https://github.com/StefH/Howler.Blazor/pull/12) - Change duration to double and pass id to &quot;howl.duration(id)&quot; [enhancement] contributed by [StefH](https://github.com/StefH)
 
