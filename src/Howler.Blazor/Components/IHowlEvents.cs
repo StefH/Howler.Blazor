@@ -8,66 +8,66 @@ namespace Howler.Blazor.Components
         /// <summary>
         /// Fires when the sound begins playing.
         /// </summary>
-        event Action<HowlPlayEventArgs> OnPlay;
+        event Action<HowlPlayEventArgs>? OnPlay;
 
         /// <summary>
         /// Fires when the sound has been stopped.
         /// </summary>
-        event Action<HowlEventArgs> OnStop;
+        event Action<HowlEventArgs>? OnStop;
 
         /// <summary>
         /// Fires when the sound finishes playing (if it is looping, it'll fire at the end of each loop).
         /// </summary>
-        event Action<HowlEventArgs> OnEnd;
+        event Action<HowlEventArgs>? OnEnd;
 
         /// <summary>
         /// Fires when the sound is unable to load.
         /// </summary>
-        event Action<HowlErrorEventArgs> OnLoadError;
+        event Action<HowlErrorEventArgs>? OnLoadError;
 
         /// <summary>
         /// Fires when the sound is unable to play.
         /// </summary>
-        event Action<HowlErrorEventArgs> OnPlayError;
+        event Action<HowlErrorEventArgs>? OnPlayError;
 
         /// <summary>
         /// Fires when the sound is loaded.
         /// </summary>
-        event Action<EventArgs> OnLoad;
+        event Action<EventArgs>? OnLoad;
 
         /// <summary>
         /// Fires when the sound has been paused.
         /// </summary>
-        event Action<HowlEventArgs> OnPause;
+        event Action<HowlEventArgs>? OnPause;
 
         /// <summary>
         /// Fires when the sound has been muted/unmuted.
         /// </summary>
-        event Action<HowlEventArgs> OnMute;
+        event Action<HowlEventArgs>? OnMute;
 
         /// <summary>
         /// Fires when the sound's volume has changed.
         /// </summary>
-        event Action<HowlEventArgs> OnVolume;
+        event Action<HowlEventArgs>? OnVolume;
 
         /// <summary>
         /// Fires when the sound's playback rate has changed.
         /// </summary>
-        event Action<HowlRateEventArgs> OnRate;
+        event Action<HowlRateEventArgs>? OnRate;
 
         /// <summary>
         /// Fires when the sound has been seeked.
         /// </summary>
-        event Action<HowlEventArgs> OnSeek;
+        event Action<HowlEventArgs>? OnSeek;
 
         /// <summary>
         /// Fires when the current sound finishes fading in/out.
         /// </summary>
-        event Action<HowlEventArgs> OnFade;
+        event Action<HowlEventArgs>? OnFade;
 
         /// <summary>
         /// Fires when audio has been automatically unlocked through a touch/click event.
         /// </summary>
-        event Action<EventArgs> OnUnlock;
+        event Action<EventArgs>? OnUnlock;
     }
 }

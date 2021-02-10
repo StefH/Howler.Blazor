@@ -7,9 +7,12 @@ namespace Howler.Blazor.Components
     public partial class Howl
     {
         [JSInvokable]
-        public void OnPlayCallback(int soundId, double durationInSeconds)
+        public void OnPlayCallback(int soundId, double? durationInSeconds)
         {
-            TotalTime = TimeSpan.FromSeconds(durationInSeconds);
+            if (durationInSeconds is not null)
+            {
+                TotalTime = TimeSpan.FromSeconds(durationInSeconds.Value);
+            }            
 
             OnPlay?.Invoke(new HowlPlayEventArgs { SoundId = soundId, TotalTime = TotalTime });
         }

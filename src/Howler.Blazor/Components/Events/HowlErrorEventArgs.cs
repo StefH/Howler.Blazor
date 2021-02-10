@@ -10,6 +10,6 @@
         /// <summary>
         /// The error message/code.
         /// </summary>
-        public string Error { get; set; }
+        public string? Error { get; set; }
     }
 }

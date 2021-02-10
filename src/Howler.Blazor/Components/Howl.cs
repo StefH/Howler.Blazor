@@ -108,14 +108,19 @@ namespace Howler.Blazor.Components
 
         public async ValueTask<TimeSpan> GetCurrentTime()
         {
-            int timeInSeconds = await _runtime.InvokeAsync<int>("howl.getCurrentTime");
-            return TimeSpan.FromSeconds(timeInSeconds);
+            var timeInSeconds = await _runtime.InvokeAsync<double?>("howl.getCurrentTime");
+            return ConvertToTimeSpan(timeInSeconds);
         }
 
         public async ValueTask<TimeSpan> GetTotalTime()
         {
-            int timeInSeconds = await _runtime.InvokeAsync<int>("howl.getTotalTime");
-            return TimeSpan.FromSeconds(timeInSeconds);
+            var timeInSeconds = await _runtime.InvokeAsync<double?>("howl.getTotalTime");
+            return ConvertToTimeSpan(timeInSeconds);
+        }
+
+        private static TimeSpan ConvertToTimeSpan(double? value)
+        {
+            return value is null ? TimeSpan.Zero : TimeSpan.FromSeconds(value.Value);
         }
     }
 }

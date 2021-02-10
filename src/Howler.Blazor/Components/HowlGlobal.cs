@@ -6,9 +6,10 @@ namespace Howler.Blazor.Components
 {
     public class HowlGlobal : IHowlGlobal
     {
-        private readonly IJSRuntime _runtime;
         public const double MaxRate = 4.0;
         public const double MinRate = 0.25;
+
+        private readonly IJSRuntime _runtime;
 
         public HowlGlobal(IJSRuntime runtime)
         {
@@ -27,7 +28,7 @@ namespace Howler.Blazor.Components
             return _runtime.InvokeAsync<string[]>("howler.getCodecs");
         }
 
-        public ValueTask<bool> IsCodecSupported(string extension)
+        public ValueTask<bool> IsCodecSupported(string? extension)
         {
             return _runtime.InvokeAsync<bool>("howler.isCodecSupported", extension);
         }

@@ -5,7 +5,7 @@
     <Description>A Blazor JSInterop wrapper for Howler.js</Description>
     <Authors>Stef Heyenrath</Authors>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
     <PackageId>Howler.Blazor</PackageId>
     <PackageTags>Blazor;Howler;Howler.js;audio;jsinterop</PackageTags>
