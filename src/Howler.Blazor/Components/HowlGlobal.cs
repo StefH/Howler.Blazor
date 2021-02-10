@@ -1,6 +1,6 @@
-﻿using Howler.Blazor.Validation;
-using Microsoft.JSInterop;
+﻿using System;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 
 namespace Howler.Blazor.Components
 {
@@ -13,9 +13,7 @@ namespace Howler.Blazor.Components
 
         public HowlGlobal(IJSRuntime runtime)
         {
-            Guard.NotNull(runtime, nameof(runtime));
-
-            _runtime = runtime;
+            _runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
         }
 
         public ValueTask Mute(bool muted)

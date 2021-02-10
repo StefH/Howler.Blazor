@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Howler.Blazor.Validation;
 using Microsoft.JSInterop;
+using Stef.Validation;
 
 namespace Howler.Blazor.Components
 {
@@ -15,7 +15,7 @@ namespace Howler.Blazor.Components
 
         public Howl(IJSRuntime runtime)
         {
-            Guard.NotNull(runtime, nameof(runtime));
+            _runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
 
             _runtime = runtime;
             _dotNetObjectReference = DotNetObjectReference.Create(this);
