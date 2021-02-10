@@ -16,6 +16,6 @@ namespace Howler.Blazor.Components
 
         ValueTask<string[]> GetCodecs();
 
-        ValueTask<bool> IsCodecSupported(string extension);
+        ValueTask<bool> IsCodecSupported(string? extension);
     }
 }

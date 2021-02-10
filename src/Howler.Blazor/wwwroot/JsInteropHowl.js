@@ -12,7 +12,10 @@ window.howl = {
             format: options.formats,
             html5: options.html5,
             onplay: async function (id) {
-                const duration = Math.round(howl.duration(id));
+                let duration = howl.duration(id);
+                if (duration === Infinity || isNaN(duration)) {
+                    duration = null;
+                }
                 await dotnetReference.invokeMethodAsync('OnPlayCallback', id, duration);
             },
             onstop: async function (id) {
@@ -103,7 +106,7 @@ window.howl = {
     getCurrentTime: function () {
         if (howl && howl.playing()) {
             const seek = howl.seek();
-            return Math.round(seek || 0);
+            return seek === Infinity || isNaN(seek) ? null : seek;
         }
 
         return 0;
@@ -111,7 +114,7 @@ window.howl = {
     getTotalTime: function () {
         if (howl) {
             const duration = howl.duration();
-            return Math.round(duration || 0);
+            return duration === Infinity || isNaN(duration) ? null : duration;
         }
 
         return 0;

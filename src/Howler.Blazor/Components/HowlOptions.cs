@@ -7,13 +7,13 @@
         /// These should be in order of preference, howler.js will automatically load the first one that is compatible with the current browser.
         /// If your files have no extensions, you will need to explicitly specify the extension using the format property.
         /// </summary>
-        public string[] Sources { get; set; }
+        public string[]? Sources { get; set; }
 
         /// <summary>
         /// Howler.js automatically detects your file format from the extension,
         /// but you may also specify a format in situations where extraction won't work (such as with a SoundCloud stream).
         /// </summary>
-        public string[] Formats { get; set; }
+        public string[]? Formats { get; set; }
 
         /// <summary>
         /// Set to true to force HTML5 Audio.
