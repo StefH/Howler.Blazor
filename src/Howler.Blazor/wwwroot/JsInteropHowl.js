@@ -40,24 +40,27 @@ window.howl = {
 
         soundId = howl.play();
 
-        howlInstances[soundId] = howl;
+        howlInstances[soundId] = {
+            howl,
+            options
+        };
 
         return soundId;
     },
     playSound: function (id) {
-        const howl = howlInstances[id];
+        const howl = getHowl(id);
         if (howl) {
             howl.play(soundId);
         }
     },
     stop: function (id) {
-        const howl = howlInstances[id];
+        const howl = getHowl(id);
         if (howl) {
             howl.stop();
         }
     },
     pause: function (id) {
-        const howl = howlInstances[id];
+        const howl = getHowl(id);
         if (howl) {
             if (howl.playing()) {
                 howl.pause(id);
@@ -67,7 +70,7 @@ window.howl = {
         }
     },
     seek: function (id, position) {
-        const howl = howlInstances[id];
+        const howl = getHowl(id);
         if (howl) {
             howl.seek(position);
         }
@@ -79,13 +82,13 @@ window.howl = {
         }
     },
     load: function (id) {
-        const howl = howlInstances[id];
+        const howl = getHowl(id);
         if (howl) {
             howl.load();
         }
     },
     unload: function (id) {
-        const howl = howlInstances[id];
+        const howl = getHowl(id);
         if (howl) {
             howl.unload();
 
@@ -94,7 +97,7 @@ window.howl = {
         }
     },
     getIsPlaying: function (id) {
-        const howl = howlInstances[id];
+        const howl = getHowl(id);
         if (howl) {
             return howl.playing();
         }
@@ -102,7 +105,7 @@ window.howl = {
         return false;
     },
     getRate: function (id) {
-        const howl = howlInstances[id];
+        const howl = getHowl(id);
         if (howl) {
             return howl.rate();
         }
@@ -110,7 +113,7 @@ window.howl = {
         return 0;
     },
     getCurrentTime: function (id) {
-        const howl = howlInstances[id];
+        const howl = getHowl(id);
         if (howl && howl.playing()) {
             const seek = howl.seek();
             return seek === Infinity || isNaN(seek) ? null : seek;
@@ -119,13 +122,22 @@ window.howl = {
         return 0;
     },
     getTotalTime: function (id) {
-        const howl = howlInstances[id];
+        const howl = getHowl(id);
         if (howl) {
             const duration = howl.duration();
             return duration === Infinity || isNaN(duration) ? null : duration;
         }
 
         return 0;
+    },
+    destroy: function () {
+        Object.keys(howlInstances).forEach(key => {
+            try {
+                unload(key);
+            } catch {
+                // no-op
+            }
+        });
     }
 };
 
@@ -147,3 +159,7 @@ window.howler = {
         return extension ? Howler._codecs[extension.replace(/^x-/, '')] : false;
     }
 };
+
+function getHowl(id) {
+    return howlInstances[id] ? howlInstances[id].howl : null;
+}

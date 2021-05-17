@@ -6,18 +6,17 @@ using Stef.Validation;
 
 namespace Howler.Blazor.Components
 {
-    public partial class Howl : IHowl
+    public partial class Howl : IHowl, IDisposable
     {
         private readonly IJSRuntime _runtime;
         private readonly DotNetObjectReference<Howl> _dotNetObjectReference;
+        private bool _isDisposed;
 
         public TimeSpan TotalTime { get; private set; } = TimeSpan.Zero;
 
         public Howl(IJSRuntime runtime)
         {
             _runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
-
-            _runtime = runtime;
             _dotNetObjectReference = DotNetObjectReference.Create(this);
         }
 
@@ -126,6 +125,27 @@ namespace Howler.Blazor.Components
         private static TimeSpan ConvertToTimeSpan(double? value)
         {
             return value is null ? TimeSpan.Zero : TimeSpan.FromSeconds(value.Value);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_isDisposed)
+            {
+                if (disposing)
+                {
+                    _runtime.InvokeVoidAsync("howl.destroy");
+
+                    _dotNetObjectReference.Dispose();
+                }
+
+                _isDisposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }
