@@ -7,6 +7,8 @@ window.howl = {
             src: options.sources,
             format: options.formats,
             html5: options.html5,
+            loop: options.loop,
+
             onplay: async function (id) {
                 let duration = howl.duration(id);
                 if (duration === Infinity || isNaN(duration)) {

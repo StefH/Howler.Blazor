@@ -20,5 +20,10 @@
         /// This should be used for large audio files so that you don't have to wait for the full file to be downloaded and decoded before playing.
         /// </summary>
         public bool Html5 { get; set; }
+
+        /// <summary>
+        /// Set to true to automatically loop the sound forever.
+        /// </summary>
+        public bool Loop { get; set; }
     }
 }
