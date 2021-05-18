@@ -6,18 +6,17 @@ using Stef.Validation;
 
 namespace Howler.Blazor.Components
 {
-    public partial class Howl : IHowl
+    public partial class Howl : IHowl, IDisposable
     {
         private readonly IJSRuntime _runtime;
         private readonly DotNetObjectReference<Howl> _dotNetObjectReference;
+        private bool _isDisposed;
 
         public TimeSpan TotalTime { get; private set; } = TimeSpan.Zero;
 
         public Howl(IJSRuntime runtime)
         {
             _runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
-
-            _runtime = runtime;
             _dotNetObjectReference = DotNetObjectReference.Create(this);
         }
 
@@ -66,61 +65,87 @@ namespace Howler.Blazor.Components
             return _runtime.InvokeAsync<int>("howl.play", _dotNetObjectReference, options);
         }
 
-        public ValueTask Stop()
+        public ValueTask Play(int soundId)
         {
-            return _runtime.InvokeVoidAsync("howl.stop");
+            return _runtime.InvokeVoidAsync("howl.playSound", soundId);
         }
 
-        public ValueTask Pause(int? soundId)
+        public ValueTask Stop(int soundId)
+        {
+            return _runtime.InvokeVoidAsync("howl.stop", soundId);
+        }
+
+        public ValueTask Pause(int soundId)
         {
             return _runtime.InvokeVoidAsync("howl.pause", soundId);
         }
 
-        public ValueTask Seek(TimeSpan position)
+        public ValueTask Seek(int soundId, TimeSpan position)
         {
-            return _runtime.InvokeVoidAsync("howl.seek", position.TotalSeconds);
+            return _runtime.InvokeVoidAsync("howl.seek", soundId, position.TotalSeconds);
         }
 
-        public ValueTask Rate(double rate)
+        public ValueTask Rate(int soundId, double rate)
         {
-            return _runtime.InvokeVoidAsync("howl.rate", rate);
+            return _runtime.InvokeVoidAsync("howl.rate", soundId, rate);
         }
 
-        public ValueTask Load()
+        public ValueTask Load(int soundId)
         {
-            return _runtime.InvokeVoidAsync("howl.load");
+            return _runtime.InvokeVoidAsync("howl.load", soundId);
         }
 
-        public ValueTask Unload()
+        public ValueTask Unload(int soundId)
         {
-            return _runtime.InvokeVoidAsync("howl.unload");
+            return _runtime.InvokeVoidAsync("howl.unload", soundId);
         }
 
-        public ValueTask<bool> IsPlaying()
+        public ValueTask<bool> IsPlaying(int soundId)
         {
-            return _runtime.InvokeAsync<bool>("howl.getIsPlaying", _dotNetObjectReference);
+            return _runtime.InvokeAsync<bool>("howl.getIsPlaying", soundId);
         }
 
-        public async ValueTask<double> GetRate()
+        public async ValueTask<double> GetRate(int soundId)
         {
-            return await _runtime.InvokeAsync<double>("howl.getRate");
+            return await _runtime.InvokeAsync<double>("howl.getRate", soundId);
         }
 
-        public async ValueTask<TimeSpan> GetCurrentTime()
+        public async ValueTask<TimeSpan> GetCurrentTime(int soundId)
         {
-            var timeInSeconds = await _runtime.InvokeAsync<double?>("howl.getCurrentTime");
+            var timeInSeconds = await _runtime.InvokeAsync<double?>("howl.getCurrentTime", soundId);
             return ConvertToTimeSpan(timeInSeconds);
         }
 
-        public async ValueTask<TimeSpan> GetTotalTime()
+        public async ValueTask<TimeSpan> GetTotalTime(int soundId)
         {
-            var timeInSeconds = await _runtime.InvokeAsync<double?>("howl.getTotalTime");
+            var timeInSeconds = await _runtime.InvokeAsync<double?>("howl.getTotalTime", soundId);
             return ConvertToTimeSpan(timeInSeconds);
         }
 
         private static TimeSpan ConvertToTimeSpan(double? value)
         {
             return value is null ? TimeSpan.Zero : TimeSpan.FromSeconds(value.Value);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_isDisposed)
+            {
+                if (disposing)
+                {
+                    _runtime.InvokeVoidAsync("howl.destroy");
+
+                    _dotNetObjectReference.Dispose();
+                }
+
+                _isDisposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

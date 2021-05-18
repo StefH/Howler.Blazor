@@ -13,8 +13,6 @@ namespace Howler.Blazor.Components
         #endregion
 
         #region  Methods
-        ValueTask<bool> IsPlaying();
-
         ValueTask<int> Play(params Uri[] locations);
 
         ValueTask<int> Play(params string[] sources);
@@ -23,29 +21,33 @@ namespace Howler.Blazor.Components
 
         ValueTask<int> Play(HowlOptions options);
 
-        ValueTask Stop();
+        ValueTask Play(int soundId);
 
-        ValueTask Pause(int? soundId = null);
+        ValueTask Stop(int soundId);
 
-        ValueTask Seek(TimeSpan position);
+        ValueTask Pause(int soundId);
 
-        ValueTask Rate(double rate);
+        ValueTask Seek(int soundId, TimeSpan position);
+
+        ValueTask Rate(int soundId, double rate);
 
         /// <summary>
         /// This is called by default, but if you set preload to false, you must call load before you can play any sounds.
         /// </summary>
-        ValueTask Load();
+        ValueTask Load(int soundId);
 
         /// <summary>
         /// Unload and destroy a Howl object. This will immediately stop all sounds attached to this sound and remove it from the cache.
         /// </summary>
-        ValueTask Unload();
+        ValueTask Unload(int soundId);
 
-        ValueTask<double> GetRate();
+        ValueTask<double> GetRate(int soundId);
 
-        ValueTask<TimeSpan> GetCurrentTime();
+        ValueTask<TimeSpan> GetCurrentTime(int soundId);
 
-        ValueTask<TimeSpan> GetTotalTime();
+        ValueTask<TimeSpan> GetTotalTime(int soundId);
+
+        ValueTask<bool> IsPlaying(int soundId);
         #endregion
     }
 }
