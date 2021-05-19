@@ -1,3 +1,6 @@
+# 0.9.7 (19 May 2021)
+- [#16](https://github.com/StefH/Howler.Blazor/pull/16) - Fix &quot;Rate&quot; [bug] contributed by [StefH](https://github.com/StefH)
+
 # 0.9.6 (18 May 2021)
 - [#14](https://github.com/StefH/Howler.Blazor/pull/14) - Ad support for multiple Howl instances [enhancement] contributed by [StefH](https://github.com/StefH)
 - [#15](https://github.com/StefH/Howler.Blazor/pull/15) - Add Loop to HowlOptions [enhancement] contributed by [StefH](https://github.com/StefH)
