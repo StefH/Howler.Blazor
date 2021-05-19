@@ -78,7 +78,7 @@ window.howl = {
         }
     },
     rate: function (id, rate) {
-        const howl = howlInstances[id];
+        const howl = getHowl(id);
         if (howl) {
             howl.rate(rate);
         }
