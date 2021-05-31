@@ -8,6 +8,7 @@ window.howl = {
             format: options.formats,
             html5: options.html5,
             loop: options.loop,
+            volume: options.volume,
 
             onplay: async function (id) {
                 let duration = howl.duration(id);
