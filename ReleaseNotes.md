@@ -1,3 +1,7 @@
+# 0.9.8 (01 June 2021)
+- [#18](https://github.com/StefH/Howler.Blazor/pull/18) - Exposed volume prop in HowlOptions contributed by [k-u-s](https://github.com/k-u-s)
+- [#17](https://github.com/StefH/Howler.Blazor/issues/17) - Support volume property [enhancement]
+
 # 0.9.7 (19 May 2021)
 - [#16](https://github.com/StefH/Howler.Blazor/pull/16) - Fix &quot;Rate&quot; [bug] contributed by [StefH](https://github.com/StefH)
 
