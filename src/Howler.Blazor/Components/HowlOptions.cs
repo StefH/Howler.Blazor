@@ -25,5 +25,10 @@
         /// Set to true to automatically loop the sound forever.
         /// </summary>
         public bool Loop { get; set; }
+
+        /// <summary>
+        /// The volume of the specific track, from 0.0 to 1.0.
+        /// </summary>
+        public double Volume { get; set; } = 1.0;
     }
 }
