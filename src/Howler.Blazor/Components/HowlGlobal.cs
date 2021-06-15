@@ -30,5 +30,10 @@ namespace Howler.Blazor.Components
         {
             return _runtime.InvokeAsync<bool>("howler.isCodecSupported", extension);
         }
+        
+        public ValueTask Volume(double volume)
+        {
+            return _runtime.InvokeVoidAsync("howler.volume", volume);
+        }
     }
 }

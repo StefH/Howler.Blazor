@@ -160,7 +160,10 @@ window.howler = {
     },
     isCodecSupported: function (extension) {
         return extension ? Howler._codecs[extension.replace(/^x-/, '')] : false;
-    }
+    },
+    volume: function (volume) {
+        Howler.volume(volume);
+    },
 };
 
 function getHowl(id) {
