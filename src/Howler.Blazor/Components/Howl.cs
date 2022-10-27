@@ -50,7 +50,7 @@ namespace Howler.Blazor.Components
 
             var options = new HowlOptions
             {
-                Sources = new[] { html5AudioUrl }
+                Sources = new[] {html5AudioUrl}
             };
 
             return _runtime.InvokeAsync<int>("howl.play", _dotNetObjectReference, options);
@@ -103,6 +103,11 @@ namespace Howler.Blazor.Components
         public ValueTask<bool> IsPlaying(int soundId)
         {
             return _runtime.InvokeAsync<bool>("howl.getIsPlaying", soundId);
+        }
+
+        public ValueTask<double> Volume(double volume, int soundId)
+        {
+            return _runtime.InvokeAsync<double>("howl.volume", volume, soundId);
         }
 
         public async ValueTask<double> GetRate(int soundId)

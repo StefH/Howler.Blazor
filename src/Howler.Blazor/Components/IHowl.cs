@@ -48,6 +48,8 @@ namespace Howler.Blazor.Components
         ValueTask<TimeSpan> GetTotalTime(int soundId);
 
         ValueTask<bool> IsPlaying(int soundId);
+        ValueTask<double> Volume(double volume, int soundId);
+
         #endregion
     }
 }

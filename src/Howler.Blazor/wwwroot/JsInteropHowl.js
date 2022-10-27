@@ -133,6 +133,14 @@ window.howl = {
 
         return 0;
     },
+    volume: function (volume, id) {
+        const howl = getHowl(id);
+        if (howl) {
+            return howl.volume(volume, id);
+        }
+
+        return 0;
+    },
     destroy: function () {
         Object.keys(howlInstances).forEach(key => {
             try {
@@ -160,7 +168,10 @@ window.howler = {
     },
     isCodecSupported: function (extension) {
         return extension ? Howler._codecs[extension.replace(/^x-/, '')] : false;
-    }
+    },
+    volume: function (volume) {
+        Howler.volume(volume);
+    },
 };
 
 function getHowl(id) {
