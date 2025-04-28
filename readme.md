@@ -2,7 +2,7 @@
 
 A Blazor JSInterop wrapper for [Howler.js](https://howlerjs.com/).
 
-[![NuGet: Howler.Blazor](https://buildstats.info/nuget/Howler.Blazor)](https://www.nuget.org/packages/Howler.Blazor)
+[![NuGet: Howler.Blazor](https://img.shields.io/nuget/v/Howler.Blazor)](https://www.nuget.org/packages/Howler.Blazor)
 
 ### Live Demo
 https://stefh.github.io/Howler.Blazor
