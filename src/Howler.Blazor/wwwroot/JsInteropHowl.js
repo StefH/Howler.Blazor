@@ -96,7 +96,7 @@ window.howl = {
             howl.unload();
 
             howlInstances[id] = null;
-            delete instances[id];
+            delete howlInstances[id];
         }
     },
     getIsPlaying: function (id) {
