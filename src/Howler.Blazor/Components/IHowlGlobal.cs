@@ -1,21 +1,21 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
-namespace Howler.Blazor.Components
+namespace Howler.Blazor.Components;
+
+/// <summary>
+/// See https://github.com/goldfire/howler.js
+/// </summary>
+public interface IHowlGlobal
 {
     /// <summary>
-    /// See https://github.com/goldfire/howler.js
+    /// Mute or unmute all sounds.
     /// </summary>
-    public interface IHowlGlobal
-    {
-        /// <summary>
-        /// Mute or unmute all sounds.
-        /// </summary>
-        /// <param name="muted">True to mute and false to unmute</param>
-        ValueTask Mute(bool muted);
+    /// <param name="muted">True to mute and false to unmute</param>
+    ValueTask Mute(bool muted);
 
-        ValueTask<string[]> GetCodecs();
+    ValueTask Volume(double volume);
 
-        ValueTask<bool> IsCodecSupported(string? extension);
-    }
+    ValueTask<string[]> GetCodecs();
+
+    ValueTask<bool> IsCodecSupported(string? extension);
 }

@@ -1,7 +1,6 @@
-﻿namespace Howler.Blazor.Components.Events
+﻿namespace Howler.Blazor.Components.Events;
+
+public class HowlRateEventArgs : HowlEventArgs
 {
-    public class HowlRateEventArgs : HowlEventArgs
-    {
-        public double CurrentRate { get; set; }
-    }
+    public double CurrentRate { get; set; }
 }

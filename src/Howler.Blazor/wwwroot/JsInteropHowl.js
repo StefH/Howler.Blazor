@@ -133,6 +133,14 @@ window.howl = {
 
         return 0;
     },
+    volume: function (id, volume) {
+        const howl = getHowl(id);
+        if (howl) {
+            return howl.volume(volume, id);
+        }
+
+        return 0;
+    },
     destroy: function () {
         Object.keys(howlInstances).forEach(key => {
             try {
