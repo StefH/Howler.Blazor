@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace Howler.Blazor.Components.Events
+namespace Howler.Blazor.Components.Events;
+
+public class HowlPlayEventArgs : HowlEventArgs
 {
-    public class HowlPlayEventArgs : HowlEventArgs
-    {
-        public TimeSpan TotalTime { get; set; }
-    }
+    public TimeSpan TotalTime { get; set; }
 }
