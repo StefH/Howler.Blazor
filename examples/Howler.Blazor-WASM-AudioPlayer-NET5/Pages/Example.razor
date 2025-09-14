@@ -47,12 +47,25 @@
             <td><button class="btn btn-primary oi oi-arrow-bottom" @onclick="SpeedDown"></button></td>
             <td>Speed Down</td>
         </tr>
+        <tr>
+            <td>
+                <button class="btn btn-primary oi oi-arrow-top" @onclick="VolumeUp"></button>
+            </td>
+            <td>Volume Up</td>
+        </tr>
+        <tr>
+            <td>
+                <button class="btn btn-primary oi oi-arrow-bottom" @onclick="VolumeDown"></button>
+            </td>
+            <td>Volume Down</td>
+        </tr>
     </table>
     <br />
 
     <pre>TotalTime : @TotalTime</pre>
     <pre>State : @State</pre>
     <pre>Playback Rate : @Rate</pre>
+    <pre>Volume: @Volume.ToString("0.0")</pre>
     <pre>Supported Codes : @SupportedCodes</pre>
     <pre>ErrorMessage : @ErrorMessage</pre>
 </div>
@@ -62,6 +75,7 @@
     private const double MinRate = 0.25;
     protected TimeSpan TotalTime;
     protected double Rate = 1.0;
+    private double Volume = 0.5;
     protected string State = "-";
     protected string SupportedCodes;
     public string ErrorMessage = "";
@@ -139,7 +153,7 @@
         ErrorMessage = string.Empty;
         Rate = 1.0;
 
-        SoundIds.Add(await Howl.Play("resources/TestRecording.ogg"));
+        SoundIds.Add(await Howl.Play("resources/thetestdata-sample-ogg-13.ogg"));
     }
 
     protected async Task Play2()
@@ -147,7 +161,7 @@
         ErrorMessage = string.Empty;
         Rate = 1.0;
 
-        SoundIds.Add(await Howl.Play("https://stefsapublic.blob.core.windows.net/test/Estas Tonne - Internal Flight Experience (Live in Cluj Napoca)(1).opus"));
+        SoundIds.Add(await Howl.Play("https://thetestdata.com/assets/audio/ogg/thetestdata-sample-ogg-6.ogg"));
     }
 
     protected async Task Play3()
@@ -173,7 +187,7 @@
         {
             Sources = new[] { "https://lookandstore.blob.core.windows.net/863da396-6e44-4b3b-8db1-e447d87b121f/instrumental_mp3_637141046337946343_99lfo/instrumental_mp3?sv=2018-03-28&sr=b&sig=96LJ7bycF3lrtiWbVP5tK6%2BOOIJKfq7eYPO%2FjOT72ns%3D&se=2022-10-04T18%3A23%3A53Z&sp=rl" },
             Formats = new[] { "mp3" },
-            Volume = 0.5
+            Volume = Volume
         };
 
         SoundIds.Add(await Howl.Play(options));
@@ -183,12 +197,13 @@
     {
         ErrorMessage = string.Empty;
         Rate = 1.0;
+        Volume = 0.25;
 
         var options = new HowlOptions
         {
             Sources = new[] { "https://lookandstore.blob.core.windows.net/863da396-6e44-4b3b-8db1-e447d87b121f/instrumental_mp3_637141046337946343_99lfo/instrumental_mp3?sv=2018-03-28&sr=b&sig=96LJ7bycF3lrtiWbVP5tK6%2BOOIJKfq7eYPO%2FjOT72ns%3D&se=2022-10-04T18%3A23%3A53Z&sp=rl" },
             Formats = new[] { "mp3" },
-            Volume = 0.25
+            Volume = Volume
         };
 
         SoundIds.Add(await Howl.Play(options));
@@ -210,7 +225,7 @@
 
     protected async Task Stop()
     {
-        foreach (int id in SoundIds)
+        foreach (var id in SoundIds)
         {
             await Howl.Stop(id);
         }
@@ -220,7 +235,7 @@
     {
         if (Rate < MaxRate && State == "Playing")
         {
-            foreach (int id in SoundIds)
+            foreach (var id in SoundIds)
             {
                 await Howl.Rate(id, Rate + .25);
             }
@@ -231,7 +246,7 @@
     {
         if (Rate > MinRate && State == "Playing")
         {
-            foreach (int id in SoundIds)
+            foreach (var id in SoundIds)
             {
                 await Howl.Rate(id, Rate - .25);
             }
@@ -240,9 +255,31 @@
 
     protected async Task Pause()
     {
-        foreach (int id in SoundIds)
+        foreach (var id in SoundIds)
         {
             await Howl.Pause(id);
+        }
+    }
+
+    private async Task VolumeUp()
+    {
+        Volume += 0.1;
+		Volume = Math.Clamp(Volume, 0, 1);
+        
+        foreach (var id in SoundIds)
+        {
+            await Howl.Volume(id, Volume);
+        }
+    }
+
+    private async Task VolumeDown()
+    {
+        Volume -= 0.1;
+        Volume = Math.Clamp(Volume, 0, 1);
+
+        foreach (var id in SoundIds)
+        {
+            await Howl.Volume(id, Volume);
         }
     }
 }
