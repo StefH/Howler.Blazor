@@ -50,7 +50,7 @@ public partial class Howl : IHowl, IDisposable
 
         var options = new HowlOptions
         {
-            Sources = new[] { html5AudioUrl }
+            Sources = [html5AudioUrl]
         };
 
         return _runtime.InvokeAsync<int>("howl.play", _dotNetObjectReference, options);

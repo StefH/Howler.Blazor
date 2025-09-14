@@ -65,7 +65,7 @@
     <pre>TotalTime : @TotalTime</pre>
     <pre>State : @State</pre>
     <pre>Playback Rate : @Rate</pre>
-    <pre>Volume: @Volume</pre>
+    <pre>Volume: @Volume.ToString("0.0")</pre>
     <pre>Supported Codes : @SupportedCodes</pre>
     <pre>ErrorMessage : @ErrorMessage</pre>
 </div>
@@ -264,6 +264,7 @@
     private async Task VolumeUp()
     {
         Volume += 0.1;
+		Volume = Math.Clamp(Volume, 0, 1);
         
         foreach (var id in SoundIds)
         {
@@ -274,6 +275,8 @@
     private async Task VolumeDown()
     {
         Volume -= 0.1;
+        Volume = Math.Clamp(Volume, 0, 1);
+
         foreach (var id in SoundIds)
         {
             await Howl.Volume(id, Volume);
