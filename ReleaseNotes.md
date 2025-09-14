@@ -1,3 +1,9 @@
+# 0.10.0 (14 September 2025)
+- [#22](https://github.com/StefH/Howler.Blazor/pull/22) - Bump System.Text.Json from 5.0.0 to 8.0.4 in /examples/Howler.Blazor-WASM-AudioPlayer-NET5 [dependencies] contributed by [dependabot[bot]](https://github.com/apps/dependabot)
+- [#23](https://github.com/StefH/Howler.Blazor/pull/23) - fixed unload ReferenceError [bug] contributed by [BugChang](https://github.com/BugChang)
+- [#24](https://github.com/StefH/Howler.Blazor/pull/24) - Add Volume [enhancement] contributed by [StefH](https://github.com/StefH)
+- [#25](https://github.com/StefH/Howler.Blazor/pull/25) - [Snyk] Security upgrade System.Text.Json from 8.0.4 to 8.0.5 contributed by [StefH](https://github.com/StefH)
+
 # 0.9.8 (01 June 2021)
 - [#18](https://github.com/StefH/Howler.Blazor/pull/18) - Exposed volume prop in HowlOptions contributed by [k-u-s](https://github.com/k-u-s)
 - [#17](https://github.com/StefH/Howler.Blazor/issues/17) - Support volume property [enhancement]
